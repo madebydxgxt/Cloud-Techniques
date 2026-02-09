@@ -38,55 +38,54 @@ Create and connect to a Windows virtual machine on AWS (EC2) so you have a worki
 ## Steps Performed
 1. **Access AWS Console**  
    Logged into the AWS Management Console and navigated to EC2 to begin provisioning a new virtual machine.  
-   (Optional screenshot) docs/step-1.png
+
 
 2. **Launch a new instance**  
    Started the EC2 “Launch Instance” flow to create a new virtual machine with standard AWS defaults.  
-   (Optional screenshot) docs/step-2.png
-
+ 
+   
 3. **Select Windows image**  
    Chose a Windows-based machine image to enable Remote Desktop access for a Windows server environment.  
-   (Optional screenshot) docs/step-3.png
 
 4. **Choose an instance type**  
    Selected an instance size appropriate for learning and cost control (example: a free-tier-eligible option).  
-   (Optional screenshot) docs/step-4.png
+
 
 5. **Create a key pair**  
    Created and downloaded a new key pair to securely retrieve/decrypt the Windows administrator password later.  
-   (Optional screenshot) docs/step-5.png
+ 
 
 6. **Review networking and access**  
    Confirmed default networking settings and ensured remote access rules were appropriate (example: allow RDP from your IP).  
-   (Optional screenshot) docs/step-6.png
+ 
 
 7. **Launch the instance**  
    Launched the virtual machine and let AWS begin provisioning and initializing the server.  
-   (Optional screenshot) docs/step-7.png
+
 
 8. **Monitor instance health checks**  
    Verified the instance was fully initialized by checking that the system and instance status checks passed.  
-   (Optional screenshot) docs/step-8.png
+
 
 9. **Confirm the instance is running**  
    Ensured the instance was in a running state (and started it if needed) before attempting to connect.  
-   (Optional screenshot) docs/step-9.png
+  
 
 10. **Retrieve and decrypt the Windows password**  
    Used the downloaded private key to decrypt the administrator password so the first login could be completed.  
-   (Optional screenshot) docs/step-10.png
+
 
 11. **Connect using Remote Desktop**  
    Downloaded the RDP file (or used an RDP client), entered the decrypted password, and logged into the Windows VM.  
-   (Optional screenshot) docs/step-11.png
+
 
 12. **Verify functionality and prep for next labs**  
    Confirmed you had interactive access to the desktop and the VM was ready for follow-on setup (example: installing roles like Active Directory).  
-   (Optional screenshot) docs/step-12.png
+ 
 
 13. **Shut down safely to control costs**  
    Logged out and stopped (or terminated) the instance when finished to avoid unnecessary charges.  
-   (Optional screenshot) docs/step-13.png
+
 
 ---
 
