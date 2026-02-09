@@ -54,12 +54,9 @@ This SOP outlines the steps to create and connect to a virtual machine in AWS, e
 - Wait for the console to load.
 
 
-- Click on 'Launch Instances' to start creating a new virtual machine.
-
 **Step 2: Configure the Virtual Machine** [0:30](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=30)
 ![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/2.jpg?raw=true)
-
-- Click on 'Launch Instances'.
+- Click on 'Launch Instances' to start creating a new virtual machine.
 - Name your server (e.g., 'my server').
 - Select the type of virtual machine (choose Windows).
 
