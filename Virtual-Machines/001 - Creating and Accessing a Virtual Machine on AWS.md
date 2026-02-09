@@ -55,7 +55,6 @@ This SOP outlines the steps to create and connect to a virtual machine in AWS, e
 - Click on 'Launch Instances' to start creating a new virtual machine.
 
 **Step 2: Configure the Virtual Machine** [0:30](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=30)
-
 ![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/2.jpg?raw=true)
 
 - Name your server (e.g., 'My Server 01').
@@ -63,59 +62,51 @@ This SOP outlines the steps to create and connect to a virtual machine in AWS, e
 - Choose the instance type that fits within the free tier (e.g., 2 CPU, 8 GB memory).
 
 **Step 3: Create a Key Pair** [1:25](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=85)
-
-![generated-image-at-00:01:25](https://loom.com/i/bbc22ab6a0284f85aa2d3bffac5421ae?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/3.jpg?raw=true)
 
 - Select 'Create Key Pair'.
 - Name your key pair (e.g., 'MyServerKey01').
 - Click 'Create Key Pair' and ensure to download and save the key file securely.
 
 **Step 4: Configure Network Settings** [2:20](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=140)
-
-![generated-image-at-00:02:20](https://loom.com/i/0bea35cbfafb4b97a4439a8318650268?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/4.jpg?raw=true)
 
 - Leave the network settings as default.
 - Click 'Launch Instance' to finalize the setup.
 
 **Step 5: Monitor Instance Initialization** [3:10](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=190)
-
-![generated-image-at-00:03:10](https://loom.com/i/b3a0aa14e2e5430dbe251bf27b87dd51?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/5.jpg?raw=true)
 
 - Go to 'Instances' to check the status of your new virtual machine.
 - Wait until the status shows '3 out of 3 checks passed'.
 
 **Step 6: Start the Instance** [3:50](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=230)
-
-![generated-image-at-00:03:50](https://loom.com/i/1ca8da2cfb95459f8c5f016a3d8007e3?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/6.jpg?raw=true)
 
 - Select your virtual machine.
 - Click on 'Instance State' and then 'Start Instance'.
 
 **Step 7: Connect to the Instance** [4:21](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=261)
-
-![generated-image-at-00:04:21](https://loom.com/i/29f06b2d98e2414ead7e5f65661fe347?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/7.jpg?raw=true)
 
 - Once the instance is running, click on 'Connect'.
 - Use the RDP client to connect.
 
 **Step 8: Retrieve Password** [4:41](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=281)
-
-![generated-image-at-00:04:41](https://loom.com/i/59eab177f9b441e08461e3771a4fad7f?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/8.jpg?raw=true)
 
 - Click on 'Get Password'.
 - Upload the private key you downloaded earlier.
 - Click 'Decrypt Password' and copy the generated password.
 
 **Step 9: Download Remote Desktop File** [5:07](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=307)
-
-![generated-image-at-00:05:07](https://loom.com/i/2e209302e3b14dc989e85f1b45e707c4?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/9.jpg?raw=true)
 
 - Click on 'Download Remote Desktop File'.
 - Open the downloaded file and enter the password when prompted.
 
 **Step 10: Access the Virtual Machine** [5:44](https://loom.com/share/9a034b9d77f143d18157d71631305b02?t=344)
-
-![generated-image-at-00:05:44](https://loom.com/i/d79e22a4e3554ed48e63fe3b3b6d547b?workflows_screenshot=true)
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Virtual-Machines/001/10.jpg?raw=true)
 
 - Click 'Yes' to connect to the virtual machine.
 - Once connected, you can set up applications like Active Directory.
