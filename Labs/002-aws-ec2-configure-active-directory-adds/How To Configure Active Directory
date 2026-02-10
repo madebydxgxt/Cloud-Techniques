@@ -1,4 +1,4 @@
-# active-directory-vm-lab
+# How To Configure Active Directory
 
 A beginner-friendly lab that installs and configures Active Directory Domain Services (AD DS) on a Windows Server virtual machine, then performs basic user administration in Active Directory.
 
