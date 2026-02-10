@@ -36,33 +36,69 @@ Automate the creation of ServiceNow incident tickets by pushing data to a Servic
 ---
 
 ## Steps Performed
-1. **Set up a ServiceNow developer instance**  
-   Identified the ServiceNow instance URL and gathered the basic account credentials needed to authenticate API requests.  
-   (Optional screenshot) docs/step-1.png
+## Provisioning Tickets in ServiceNow Using PowerShell
 
-2. **Review and customize the PowerShell script**  
-   Updated the script with the instance details and user credentials, and confirmed the request payload fields were set for ticket creation.  
-   (Optional screenshot) docs/step-2.png
+### Objective
 
-3. **Prepare the API request payload**  
-   Defined a simple ticket payload (example: short description and other common fields) to send to ServiceNow via the API.  
-   (Optional screenshot) docs/step-3.png
+This SOP outlines the steps to provision tickets into ServiceNow using a PowerShell script for automation, particularly for bulk updates.
 
-4. **Execute the script to create a ticket**  
-   Ran the PowerShell script to post the payload to ServiceNow and create a new incident record.  
-   (Optional screenshot) docs/step-4.png
+### Key Steps
 
-5. **Capture the created ticket identifier from the response**  
-   Checked the output for the returned incident identifier/number (example shown in the video: `task_effective_number`) to use for lookup.  
-   (Optional screenshot) docs/step-5.png
+**1. Prepare Your Environment** [0:02](https://loom.com/share/a401750e284d407690e7d73426b871dc?t=2)
 
-6. **Verify the incident in ServiceNow**  
-   Opened the Incident list in ServiceNow and searched for the returned ticket number to confirm the record was created successfully.  
-   (Optional screenshot) docs/step-6.png
+![image alt](
 
-7. **Troubleshoot record visibility (if needed)**  
-   Refreshed and re-checked the Incident list/search when the ticket did not appear immediately, then confirmed it was present.  
-   (Optional screenshot) docs/step-7.png
+- Open your PowerShell terminal.
+- Ensure you have access to your ServiceNow developer instance.
+
+**2. Copy the PowerShell Script** [0:26](https://loom.com/share/a401750e284d407690e7d73426b871dc?t=26)
+
+
+
+- Copy the provided PowerShell script.
+- Make sure to replace the placeholder values with your actual developer instance, username, and password.
+
+**3. Paste the Script in PowerShell** [1:04](https://loom.com/share/a401750e284d407690e7d73426b871dc?t=64)
+
+
+
+- Paste the modified script into your PowerShell terminal.
+
+**4. Execute the Script** [1:12](https://loom.com/share/a401750e284d407690e7d73426b871dc?t=72)
+
+
+
+- Run the script to push the data to ServiceNow.
+
+**5. Retrieve Task Effective Number** [1:23](https://loom.com/share/a401750e284d407690e7d73426b871dc?t=83)
+
+
+
+- After execution, note the task effective number from the output.
+
+**6. Search for the Incident in ServiceNow** [2:00](https://loom.com/share/a401750e284d407690e7d73426b871dc?t=120)
+
+
+
+- Log into your ServiceNow instance.
+- Navigate to the incidents section.
+- Use the task effective number to search for the newly created incident.
+
+**7. Verify the Incident** [2:26](https://loom.com/share/a401750e284d407690e7d73426b871dc?t=146)
+
+
+
+- Confirm that the incident appears in the search results.
+
+### Cautionary Notes
+
+- Ensure that you have the necessary permissions to access and modify ServiceNow data.
+- Double-check your username and password to avoid authentication errors.
+
+### Tips for Efficiency
+
+- Use a text editor to modify the PowerShell script before pasting it into the terminal to avoid syntax errors.
+- Keep a record of the task effective numbers for future reference.
 
 ---
 
