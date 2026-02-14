@@ -46,7 +46,7 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 **Step 1: Create a Resource** [0:13](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=13)
 
-![image alt](
+![image alt](https://github.com/madebydxgxt/Cloud-Techniques/blob/main/Labs/007-how-to-host-a-static-website/artifacts/1.jpg?raw=true)
 
 - Log in to your Azure account.
 - Navigate to the 'Create a resource' section.
