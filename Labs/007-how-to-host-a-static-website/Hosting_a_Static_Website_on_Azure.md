@@ -46,7 +46,7 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 **Step 1: Create a Resource** [0:13](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=13)
 
-
+![image alt](
 
 - Log in to your Azure account.
 - Navigate to the 'Create a resource' section.
@@ -54,7 +54,6 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 **Step 2: Configure Storage Account** [0:40](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=40)
 
-![image alt](![generated-image-at-00:00:40](https://loom.com/i/3467b80f8e5d488c851054c5e1bfe672?workflows_screenshot=true))
 
 - Name your storage account (ensure it is unique).
 - Select the region closest to your location (e.g., East Coast).
@@ -63,14 +62,12 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 **Step 3: Create the Storage Account** [1:41](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=101)
 
-![generated-image-at-00:01:41](https://loom.com/i/ea6f2c7f047e4295a174c5019582a768?workflows_screenshot=true)
 
 - Click 'Create' to deploy the storage account.
 - Wait for the deployment to complete.
 
 **Step 4: Enable Static Website Hosting** [2:30](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=150)
 
-![generated-image-at-00:02:30](https://loom.com/i/55d15b84119c410e87a785766068f2b3?workflows_screenshot=true)
 
 - Go to 'Data Management' in your storage account.
 - Select 'Static Website'.
@@ -78,7 +75,6 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 **Step 5: Configure Index and Error Documents** [3:00](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=180)
 
-![generated-image-at-00:03:00](https://loom.com/i/9ee7c373f7b2457c91ff27fa82c6ed96?workflows_screenshot=true)
 
 - Set the index document name to 'index.html'.
 - Set the error document name to '404.html'.
@@ -86,7 +82,6 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 **Step 6: Upload Website Files** [4:40](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=280)
 
-![generated-image-at-00:04:40](https://loom.com/i/08756dc33478497dad028b091f97420e?workflows_screenshot=true)
 
 - Go to 'Blob service' in your storage account.
 - Click on 'Web' to access the web container.
@@ -94,7 +89,6 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 **Step 7: Access Your Website** [7:04](https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba?t=424)
 
-![generated-image-at-00:07:04](https://loom.com/i/fa4f1e31e6d94e0b9d1d440151d88745?workflows_screenshot=true)
 
 - Copy the primary endpoint URL from the 'Static Website' section.
 - Paste the URL into your web browser to access your static website.
@@ -108,10 +102,6 @@ This SOP outlines the steps to host a static website using Azure's Blob Storage 
 
 - Use a text editor like VSCode to create and edit your HTML files before uploading.
 - Keep your files organized in a local directory to streamline the upload process.
-
-### Link to Loom
-
-<https://loom.com/share/95c44fe345c64003a5e720a0336ec0ba>
 
 ---
 
