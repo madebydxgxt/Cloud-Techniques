@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI‑Assisted Construction Scheduling Feedback</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --slate: #3a3a5c;
+    --muted: #6b6b8d;
+    --sand: #f5f0e8;
+    --cream: #faf7f2;
+    --accent: #e86f3c;
+    --accent-glow: #f4a261;
+    --teal: #2a9d8f;
+    --teal-light: #40b8a8;
+    --card-bg: #ffffff;
+    --border: #e8e4dc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* --- HEADER --- */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .header-badge svg { width: 14px; height: 14px; }
+
+  .header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .header .time-est {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* --- LOOP GRAPHIC --- */
+  .loop-container {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 36px 24px 32px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .loop-container::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(232,111,60,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .loop-container::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(42,157,143,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .loop-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  .loop-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .loop-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .loop-step:nth-child(1) { animation-delay: 0.1s; }
+  .loop-step:nth-child(2) { animation-delay: 0.25s; }
+  .loop-step:nth-child(3) { animation-delay: 0.4s; }
+  .loop-step:nth-child(4) { animation-delay: 0.55s; }
+  .loop-step:nth-child(5) { animation-delay: 0.7s; }
+
+  .step-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    position: relative;
+  }
+
+  .step-icon.field { background: rgba(42,157,143,0.2); border: 1.5px solid rgba(42,157,143,0.5); }
+  .step-icon.schedule { background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); }
+  .step-icon.ai { background: rgba(232,111,60,0.2); border: 1.5px solid rgba(232,111,60,0.5); }
+  .step-icon.human { background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); }
+  .step-icon.update { background: rgba(42,157,143,0.2); border: 1.5px solid rgba(42,157,143,0.5); }
+
+  .step-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  .loop-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+    margin-bottom: 18px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .loop-arrow:nth-of-type(2) { animation-delay: 0.18s; }
+  .loop-arrow:nth-of-type(4) { animation-delay: 0.33s; }
+  .loop-arrow:nth-of-type(6) { animation-delay: 0.48s; }
+  .loop-arrow:nth-of-type(8) { animation-delay: 0.63s; }
+
+  .loop-arrow svg {
+    width: 20px;
+    height: 20px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* return arrow */
+  .return-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    gap: 8px;
+    animation: fadeUp 0.6s ease 0.85s both;
+  }
+
+  .return-line {
+    height: 1px;
+    flex: 1;
+    max-width: 120px;
+    background: linear-gradient(90deg, rgba(42,157,143,0.5), rgba(232,111,60,0.5));
+  }
+
+  .return-text {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* --- SECTIONS --- */
+  .section {
+    margin-bottom: 28px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .section:nth-of-type(1) { animation-delay: 0.2s; }
+  .section:nth-of-type(2) { animation-delay: 0.3s; }
+  .section:nth-of-type(3) { animation-delay: 0.4s; }
+  .section:nth-of-type(4) { animation-delay: 0.5s; }
+  .section:nth-of-type(5) { animation-delay: 0.6s; }
+  .section:nth-of-type(6) { animation-delay: 0.7s; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .section p {
+    font-size: 15px;
+    color: var(--slate);
+    line-height: 1.65;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .audience-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .audience-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--sand);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--slate);
+  }
+
+  .audience-chip svg {
+    width: 16px;
+    height: 16px;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .no-ai-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 10px;
+  }
+
+  /* feature pills */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .features { grid-template-columns: 1fr; }
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--sand);
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .feature-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .feature-item span {
+    font-size: 13.5px;
+    color: var(--slate);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .human-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(42,157,143,0.07);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+  }
+
+  .human-note svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .problem-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 19px;
+    color: var(--ink);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.5s ease 0.8s both;
+  }
+
+  .cta-section .section-tag {
+    margin-bottom: 14px;
+  }
+
+  .cta-section p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .email-mock {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .email-input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    background: #fff;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-input:focus {
+    border-color: var(--accent);
+  }
+
+  .email-input::placeholder {
+    color: #bbb;
+  }
+
+  .next-btn {
+    padding: 14px 28px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+
+  .next-btn:hover {
+    background: #d4612f;
+    transform: translateY(-1px);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Print / screenshot friendly */
+  @media print {
+    body { background: #fff; }
+    .loop-container { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      Feedback Survey
+    </div>
+    <h1>AI‑Assisted Construction<br>Scheduling Feedback</h1>
+    <span class="time-est">5–10 minutes</span>
+  </div>
+
+  <!-- LOOP GRAPHIC -->
+  <div class="loop-container">
+    <div class="loop-label">The Feedback Loop</div>
+    <div class="loop-flow">
+
+      <div class="loop-step">
+        <div class="step-icon field">🏗️</div>
+        <div class="step-label">Field</div>
+      </div>
+
+      <div class="loop-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="loop-step">
+        <div class="step-icon schedule">📋</div>
+        <div class="step-label">Schedule</div>
+      </div>
+
+      <div class="loop-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="loop-step">
+        <div class="step-icon ai">🤖</div>
+        <div class="step-label">AI Check</div>
+      </div>
+
+      <div class="loop-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="loop-step">
+        <div class="step-icon human">👤</div>
+        <div class="step-label">Human<br>Approval</div>
+      </div>
+
+      <div class="loop-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="loop-step">
+        <div class="step-icon update">✅</div>
+        <div class="step-label">Update</div>
+      </div>
+
+    </div>
+
+    <div class="return-arrow">
+      <div class="return-line"></div>
+      <span class="return-text">Continuous Loop</span>
+      <div class="return-line"></div>
+    </div>
+  </div>
+
+  <!-- PURPOSE -->
+  <div class="section">
+    <div class="section-tag">Purpose</div>
+    <p>I'm testing an idea for an AI‑assisted scheduling tool and need your honest feedback on whether it reflects how schedules are really built, updated, and used on active projects.</p>
+  </div>
+
+  <!-- WHO THIS IS FOR -->
+  <div class="section">
+    <div class="section-tag">Who This Is For</div>
+    <div class="audience-list">
+      <div class="audience-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Schedulers / Project Controls
+      </div>
+      <div class="audience-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        PMs, Supers, GCs
+      </div>
+      <div class="audience-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Anyone who updates, reviews, or relies on the schedule
+      </div>
+    </div>
+    <div class="no-ai-note">No AI expertise needed.</div>
+  </div>
+
+  <!-- WHAT THE TOOL DOES -->
+  <div class="section">
+    <div class="section-tag">What the Tool Does</div>
+    <div class="card">
+      <p style="margin-bottom: 14px; font-size: 14px; color: var(--muted);">An AI assistant that plugs into your existing schedule and helps by:</p>
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <span>Catching issues early</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <span>Explaining risks in plain language</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <span>Showing recovery options based on real constraints</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot"></div>
+          <span>Comparing time / cost / risk tradeoffs</span>
+        </div>
+      </div>
+      <div class="human-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Humans stay in control — AI only recommends.
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="section">
+    <div class="section-tag">The Problem It Addresses</div>
+    <p class="problem-text">Schedules drift because updates are slow and field changes move fast. This concept is meant to close that gap.</p>
+  </div>
+
+  <!-- WHAT I NEED -->
+  <div class="section">
+    <div class="section-tag">What I Need From You</div>
+    <p>Answer based on your experience. If something doesn't apply to your role, skip it or answer based on what you've seen on projects.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="section-tag">Next</div>
+    <p>Enter your email below and click Next.</p>
+    <div class="email-mock">
+      <input type="email" class="email-input" placeholder="you@company.com">
+      <button class="next-btn">Next →</button>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
